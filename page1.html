@@ -60,12 +60,28 @@
             <li>Now, we start the induction part. Suppose that when $i = k$, the $w_i(\theta,X^{(1)},\cdots,X^{(i)}) = P(X^{(1)},\cdots,X^{(i)}|\theta)$ holds. That is $w_k(\theta,X^{(1)},\cdots,X^{(k)}) = P(X^{(1)},\cdots,X^{(k)}|\theta)$</li>
             <li>Then, when $i = k+1$, we have samples $X^{(1)}, X^{(2)},\cdots,X^{(k+1)}$.</li>
             <div class="equation">
-                <li>Continue the induction reasoning part.</li>
-                <!-- Continue the induction reasoning part -->
+                <li>Now, since when given a fixed $\theta$, samples are pairwisely independent (this is the basic assumption of statistics, samples should be independent under the same models), which means that:</li>
+                <div class="equation">
+                    <li>$P(X^{(1)},X^{(2)},\cdots,X^{(n)}|\theta) = P(X^{(1)}|\theta)P(X^{(2)}|X^{(1)},\theta)\cdots P(X^{(n)}|X^{(1)},X^{(2)},\cdots,X^{(n-1)},\theta)$</li>
+                </div>
+                <li>Continue on $\frac{P(X^{(2)}|\theta)P(X^{(1)}|\theta)P(\theta)}{\int_{\theta}P(X^{(2)}|\theta)P(X^{(1)}|\theta)P(\theta)d\theta}$ we have:</li>
+                <div class="equation">
+                    <li>$\omega_2(\theta,X^{(1)},X^{(2)}) = P(\theta|X^{(1)},X^{(2)})$</li>
+                </div>
             </div>
+            <li>For summary, you show that if</li>
+            <div class="equation">
+                <li>$\omega_{k}(\theta,X^{(1)}, X^{(2)},\cdots,X^{(k)}) = P(\theta|X^{(1)},\cdots,X^{(k)})$</li>
+            </div>
+            <li>we can prove that</li>
+            <div class="equation">
+                <li>$\omega_{k+1}(\theta,X^{(1)}, X^{(2)},\cdots,X^{(k+1)}) = P(\theta|X^{(1)},\cdots,X^{(k+1)})$</li>
+            </div>
+            <li>We finish the induction reasoning part of the proof.</li>
         </ul>
     </ul>
 </div>
 
 </body>
 </html>
+
