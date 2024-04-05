@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proof</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        .proof {
+            background-color: #f2c2f2;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Times New Roman', Times, serif;
+            margin-bottom: 20px;
+        }
+        .equation {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="proof">
+    <p>Suppose that you have finite samples: $X^{(1)}, X^{(2)},\cdots,X^{(n)}$. Then the result of (1) Finding the posterior distribution of parameters at once is the same as (2) Finding the posterior distribution of parameters iteratively using the following algorithm.</p>
+    
+    <p>Algorithm:</p>
+    <div class="equation">
+        <p>Initialize Prior Distribution $P(\theta)$ whatever you want.</p>
+        <p>Compute the distribution $\omega_1(\theta,X^{(1)})$ using the following formulas: $\omega_1(\theta,X^{(1)}) = \frac{P(X^{(1)}|\theta)P(\theta)}{P(X^{(1)})}$</p>
+        <p>Loop $i$ from $2$ to $n$:</p>
+        <div class="equation">
+            <p>Compute the distribution $\omega$ using the following formulas:</p>
+            <p>$\omega_i(\theta,X^{(1)},\cdots,X^{(i)}) = \frac{P(X^{(1)},\cdots,X^{(i)}|\theta)\omega_{i-1}(\theta,X^{(1)},\cdots,X^{(i-1)})}{\int_{\theta}P(X^{(1)},\cdots,X^{(i)}|\theta)\omega_{i-1}(\theta,X^{(1)},\cdots,X^{(i-1)}) d\theta}$</p>
+        </div>
+    </div>
+</div>
+
+<div class="proof">
+    <p>Now, we want to prove that for each $i$ from $1$ to $n$, the $w_i(\theta,X^{(1)},\cdots,X^{(i)}) = P(\theta|X^{(1)},\cdots,X^{(i)})$. (The algorithm does give the posterior distribution of Bayesian inference)</p>
+    <p>Proof:</p>
+    <ul>
+        <li><strong>Base Case:</strong> When $i = 1$: $\omega_1(\theta,X^{(1)}) = \frac{P(X^{(1)}|\theta)P(\theta)}{P(X^{(1)})} = P(\theta|X^{(1)})$, which proves that it is indeed the posterior distribution.</li>
+        <li><strong>Inductive Step:</strong></li>
+        <ul>
+            <li>When $i = 2$: Now we have two samples $X^{(1)}$ and $X^{(2)}$.</li>
+            <div class="equation">
+                <li>Since we compute the $\omega_1(\theta,X^{(1)})$ at first, we have already got:</li>
+                <li>$\omega_1(\theta,X^{(1)}) = \frac{P(X^{(1)}|\theta)P(\theta)}{P(X^{(1)})}$</li>
+                <li>Then, we use $\omega_1(\theta,X^{(1)})$ to be the prior distribution of next iteration:</li>
+                <li>$w_2(\theta,X^{(1)},X^{(2)}) = \frac{P(X^{(2)}|\theta)\omega_1(\theta,X^{(1)})}{\int_{\theta}P(X^{(2)}|\theta)\omega_1(\theta,X^{(1)})d\theta}$</li>
+                <li>Continue on $w_2(\theta,X^{(1)},X^{(2)})$ we have:</li>
+                <div class="equation">
+                    <li>$\omega_2(\theta,X^{(1)},X^{(2)}) = P(\theta|X^{(1)},X^{(2)})$</li>
+                </div>
+            </div>
+            <li>Now, we start the induction part. Suppose that when $i = k$, the $w_i(\theta,X^{(1)},\cdots,X^{(i)}) = P(X^{(1)},\cdots,X^{(i)}|\theta)$ holds. That is $w_k(\theta,X^{(1)},\cdots,X^{(k)}) = P(X^{(1)},\cdots,X^{(k)}|\theta)$</li>
+            <li>Then, when $i = k+1$, we have samples $X^{(1)}, X^{(2)},\cdots,X^{(k+1)}$.</li>
+            <div class="equation">
+                <li>Now, since when given a fixed $\theta$, samples are pairwisely independent (this is the basic assumption of statistics, samples should be independent under the same models), which means that:</li>
+                <div class="equation">
+                    <li>$P(X^{(1)},X^{(2)},\cdots,X^{(n)}|\theta) = P(X^{(1)}|\theta)P(X^{(2)}|X^{(1)},\theta)\cdots P(X^{(n)}|X^{(1)},X^{(2)},\cdots,X^{(n-1)},\theta)$</li>
+                </div>
+                <li>Continue on $\frac{P(X^{(2)}|\theta)P(X^{(1)}|\theta)P(\theta)}{\int_{\theta}P(X^{(2)}|\theta)P(X^{(1)}|\theta)P(\theta)d\theta}$ we have:</li>
+                <div class="equation">
+                    <li>$\omega_2(\theta,X^{(1)},X^{(2)}) = P(\theta|X^{(1)},X^{(2)})$</li>
+                </div>
+            </div>
+            <li>For summary, you show that if</li>
+            <div class="equation">
+                <li>$\omega_{k}(\theta,X^{(1)}, X^{(2)},\cdots,X^{(k)}) = P(\theta|X^{(1)},\cdots,X^{(k)})$</li>
+            </div>
+            <li>we can prove that</li>
+            <div class="equation">
+                <li>$\omega_{k+1}(\theta,X^{(1)}, X^{(2)},\cdots,X^{(k+1)}) = P(\theta|X^{(1)},\cdots,X^{(k+1)})$</li>
+            </div>
+            <li>We finish the induction reasoning part of the proof.</li>
+        </ul>
+    </ul>
+</div>
+
+</body>
+</html>
